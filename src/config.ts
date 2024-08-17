@@ -4,7 +4,7 @@ export const SITE: Site = {
     author: 'Godruoyi',
     url: 'https://0xrupeshsardar.github.io',
     title: 'Rupesh',
-    description: 'Godruoyi\'s personal blog, I enjoy the process of building something using any technology stack',
+    description: 'Rupesh\'s personal blog, I enjoy the process of building something using any technology stack',
     shortDescription: '',
 }
 
@@ -13,7 +13,7 @@ export const NavigationLinks: NavigationLink[] = [
     { name: 'Posts', url: '/posts' },
     { name: 'Category', url: '/categories' },
     { name: 'Timeline', url: '/timeline' },
-    { name: 'About', url: '/posts/about-godruoyi' },
+    { name: 'About', url: '/posts/about-rupesh' },
 ]
 
 export const FooterLinks = [
@@ -42,21 +42,16 @@ export const Settings = {
         id: 'G-TKQ4L3ZDSF',
     },
 
-    // See https://github.com/umami-software/umami
     UmamiAnalytics: {
         enable: true,
         dataWebsiteID: 'bf63658a-9418-4f39-a6a1-5a0cedb6e429',
     },
 
     Comment: {
-        // todo: should I use meta or process?
-        // process reports an error when used locally,
-        // and meta cannot retrieve environment variables in Cloudflare environment.
-        // enable: !!(import.meta.env.COMMENT_ENABLE),
+
         enable: !!(process.env.COMMENT_ENABLE),
 
-        // please visit https://giscus.app/ to learn how to configure it.
-        // You can also check out this article: https://liruifengv.com/posts/add-comments-to-astro/.
+        
         giscus: {
             repo: 'godruoyi/gblog',
             repoId: 'MDEwOlJlcG9zaXRvcnkxMjcyODI0NzA',
@@ -68,17 +63,9 @@ export const Settings = {
     },
 
     Assets: {
-        // If you don't want to upload the build assert(image/js/css/etc...) to anywhere, just set this to false
         uploadAssetsToS3: !!(process.env.S3_ENABLE),
         config: {
-            // see https://github.com/syhily/astro-uploader to get how to configure the uploader,
-            // The following configuration will upload the compiled `assets` folder to S3 or R2.
-            // You can set a separate domain for it so that you can access all resources using a CDN domain name.
-            //
-            // For example: https://images.godruoyi.com/gblog/assets/brand-logo.webp
-            //
-            // Note that you may also need to modify `build.assetsPrefix` in `astro.config.mjs` if you want to
-            // automatically replace all images/js/css with a CDN link.
+            
             paths: ['assets'],
             endpoint: process.env.S3_ENDPOINT as string,
             bucket: process.env.S3_BUCKET as string,

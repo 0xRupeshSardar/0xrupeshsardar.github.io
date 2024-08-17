@@ -1,4 +1,4 @@
 ---
-title: 'Book'
+title: 'CTFs'
 description: 'Description'
 ---

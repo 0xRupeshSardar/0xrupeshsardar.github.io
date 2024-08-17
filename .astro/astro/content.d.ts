@@ -151,9 +151,30 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"categories": {
+"Android Application security.md": {
+	id: "Android Application security.md";
+  slug: "android-application-security";
+  body: string;
+  collection: "categories";
+  data: InferEntrySchema<"categories">
+} & { render(): Render[".md"] };
+"api security.md": {
+	id: "api security.md";
+  slug: "api-security";
+  body: string;
+  collection: "categories";
+  data: InferEntrySchema<"categories">
+} & { render(): Render[".md"] };
 "books.md": {
 	id: "books.md";
   slug: "books";
+  body: string;
+  collection: "categories";
+  data: InferEntrySchema<"categories">
+} & { render(): Render[".md"] };
+"ctf writeup.md": {
+	id: "ctf writeup.md";
+  slug: "ctf-writeup";
   body: string;
   collection: "categories";
   data: InferEntrySchema<"categories">
@@ -165,16 +186,9 @@ declare module 'astro:content' {
   collection: "categories";
   data: InferEntrySchema<"categories">
 } & { render(): Render[".md"] };
-"kubernetes.md": {
-	id: "kubernetes.md";
-  slug: "kubernetes";
-  body: string;
-  collection: "categories";
-  data: InferEntrySchema<"categories">
-} & { render(): Render[".md"] };
-"laravel.md": {
-	id: "laravel.md";
-  slug: "laravel";
+"hackthebox.md": {
+	id: "hackthebox.md";
+  slug: "hackthebox";
   body: string;
   collection: "categories";
   data: InferEntrySchema<"categories">
@@ -186,37 +200,30 @@ declare module 'astro:content' {
   collection: "categories";
   data: InferEntrySchema<"categories">
 } & { render(): Render[".md"] };
-"mysql.md": {
-	id: "mysql.md";
-  slug: "mysql";
+"malware analysis.md": {
+	id: "malware analysis.md";
+  slug: "malware-analysis";
   body: string;
   collection: "categories";
   data: InferEntrySchema<"categories">
 } & { render(): Render[".md"] };
-"nginx.md": {
-	id: "nginx.md";
-  slug: "nginx";
+"malware development.md": {
+	id: "malware development.md";
+  slug: "malware-development";
   body: string;
   collection: "categories";
   data: InferEntrySchema<"categories">
 } & { render(): Render[".md"] };
-"php.md": {
-	id: "php.md";
-  slug: "php";
+"tryhackme.md": {
+	id: "tryhackme.md";
+  slug: "tryhackme";
   body: string;
   collection: "categories";
   data: InferEntrySchema<"categories">
 } & { render(): Render[".md"] };
-"tool.md": {
-	id: "tool.md";
-  slug: "tool";
-  body: string;
-  collection: "categories";
-  data: InferEntrySchema<"categories">
-} & { render(): Render[".md"] };
-"whatis.md": {
-	id: "whatis.md";
-  slug: "whatis";
+"web security.md": {
+	id: "web security.md";
+  slug: "web-security";
   body: string;
   collection: "categories";
   data: InferEntrySchema<"categories">
@@ -230,9 +237,9 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
-"About-godruoyi.md": {
-	id: "About-godruoyi.md";
-  slug: "about-godruoyi";
+"About-rupesh.md": {
+	id: "About-rupesh.md";
+  slug: "about-rupesh";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">

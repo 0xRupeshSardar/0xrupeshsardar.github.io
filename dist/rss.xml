@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>连波的闲谈杂鱼</title><description>Godruoyi&apos;s personal blog, I enjoy the process of building something using any technology stack</description><link>https://godruoyi.com/</link><item><title>2020 年终总结</title><link>https://godruoyi.com/posts/2020-year-end-review/</link><guid isPermaLink="true">https://godruoyi.com/posts/2020-year-end-review/</guid><description>二愣和阿宝今年过年没回家。这是二愣第一次不回家过年。小两口坐在重庆小家的沙发上，嗑着坚果、喝着果汁、嘻嘻哈哈的看着春晚。</description><pubDate>Thu, 11 Feb 2021 10:12:01 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Rupesh</title><description>Godruoyi&apos;s personal blog, I enjoy the process of building something using any technology stack</description><link>https://0xrupeshsardar.github.io/</link><item><title>About Rupesh </title><link>https://0xrupeshsardar.github.io/posts/about-rupesh/</link><guid isPermaLink="true">https://0xrupeshsardar.github.io/posts/about-rupesh/</guid><description>Description</description><pubDate>Sat, 17 Aug 2024 04:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Welcome to my digital space! I’m Rupesh Sardar, an Application Security Engineer and Penetration Tester driven by a deep passion for cybersecurity. My journey through the realms of programming and cutting-edge cybersecurity tools has empowered me to excel in bug bounty hunting and the intricate world of malware analysis.&lt;/p&gt;
+&lt;p&gt;I thrive on the thrill of Capture the Flag competitions, where my analytical skills and innovative problem-solving abilities are put to the test. These challenges not only sharpen my expertise but also fuel my commitment to staying ahead of emerging threats in the ever-evolving digital landscape.&lt;/p&gt;
+&lt;p&gt;Continuous learning is my mantra, and I am dedicated to advancing my knowledge to better protect the digital world. I am always eager to collaborate with like-minded professionals, sharing insights and strategies to enhance our collective security efforts.&lt;/p&gt;
+&lt;p&gt;Let’s connect and work together to make the digital world a safer place for everyone. Whether it’s through impactful cybersecurity projects, initiatives, or simply sharing knowledge, I am excited to contribute and learn from this dynamic community.&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;🌐 LinkedIn:&lt;/strong&gt; &lt;a href=&quot;https://www.linkedin.com/in/rupesh-sardar&quot;&gt;Rupesh Sardar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🐦 Twitter:&lt;/strong&gt; &lt;a href=&quot;https://twitter.com/Rupesh_Sardar&quot;&gt;@Rupesh_Sardar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;💻 GitHub:&lt;/strong&gt; &lt;a href=&quot;https://github.com/rupeshsardar&quot;&gt;rupeshsardar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;✉️ Email:&lt;/strong&gt; &lt;a href=&quot;mailto:rupesh.sardar@example.com&quot;&gt;rupesh.sardar@example.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;📱 Telegram:&lt;/strong&gt; &lt;a href=&quot;https://t.me/RupeshSardar&quot;&gt;@RupeshSardar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🔗 Blog:&lt;/strong&gt; &lt;a href=&quot;https://rupeshsardar.com/blog&quot;&gt;Rupesh Sardar’s Blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;</content:encoded></item><item><title>2020 年终总结</title><link>https://0xrupeshsardar.github.io/posts/2020-year-end-review/</link><guid isPermaLink="true">https://0xrupeshsardar.github.io/posts/2020-year-end-review/</guid><description>description</description><pubDate>Thu, 11 Feb 2021 10:12:01 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;二愣和阿宝今年过年没回家。这是二愣第一次不回家过年。小两口坐在重庆小家的沙发上，嗑着坚果、喝着果汁、嘻嘻哈哈的看着春晚。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;对于我来说，过完农历三十才叫新年呐。看着 bear 里只埋了标题的年终总结，压的我看春晚都看不起劲。&lt;/p&gt;
@@ -23,16 +36,4 @@
 &lt;h2 id=&quot;往年总结&quot;&gt;往年总结&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://godruoyi.com/posts/continue-refueling-in-2019&quot;&gt;2019 年终总结&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title>About Godruoyi</title><link>https://godruoyi.com/posts/about-godruoyi/</link><guid isPermaLink="true">https://godruoyi.com/posts/about-godruoyi/</guid><description>Godruoyi，15 年毕业于西南大学计算机专业，Laravel 爱好者；目前靠 Go 养家糊口，抽空学习 Rust，全职远程中</description><pubDate>Tue, 26 Mar 2019 12:30:48 GMT</pubDate><content:encoded>&lt;p&gt;Godruoyi，15&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/godruoyi/ocr&quot;&gt;🧚🏾 The Best Image OCR SDK For BAT&lt;/a&gt;  集成腾讯、阿里、百度的文字识别 SDK&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/godruoyi/easy-container&quot;&gt;📦 一个简单的依赖注入容器（from Laravel Container）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/godruoyi/laravel-tips&quot;&gt;🍡 Laravel tips in terminal&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/godruoyi/laravel-tips-raycast&quot;&gt;🥑 Laravel Tips In Raycast&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://godruoyi.com/posts/php-id-generator-based-on-snowflake-algorithm&quot;&gt;❄️ 雪花算法的 PHP 实现&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://godruoyi.com/posts/golang-snowflake&quot;&gt;🌨️ 雪花算法的 Golang 实现&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/godruoyi/wakeup&quot;&gt;🌰 Wakeup&lt;/a&gt; Use AI to create admirable images to surprise your every morning&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://godruoyi.com/posts/the-resetful-api-design-specification&quot;&gt;📰 RESTful API 设计规范&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/godruoyi/readog&quot;&gt;🐶 Readog is a browser extension that can save your links to any platform&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/godruoyi/gblog&quot;&gt;🎈 An beautiful blog built with Astro&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item></channel></rss>

@@ -1,6 +1,6 @@
 ---
 title: "2020 年终总结"
-description: "二愣和阿宝今年过年没回家。这是二愣第一次不回家过年。小两口坐在重庆小家的沙发上，嗑着坚果、喝着果汁、嘻嘻哈哈的看着春晚。"
+description: "description"
 pubDate: "2021-02-11 15:42:01"
 category: "life"
 banner: "@images/banners/pysRbXAo7Ag6uh9grFDfUq7yktlfAHbBg9U4B7zA.png"

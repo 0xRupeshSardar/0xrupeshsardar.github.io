@@ -16,4 +16,4 @@ Crawl-delay: 2
 User-agent: *
 Allow: /
 
-Sitemap: https://godruoyi.com/sitemap-index.xml
+Sitemap: https://0xrupeshsardar.github.io/sitemap-index.xml
