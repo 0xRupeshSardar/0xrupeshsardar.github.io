@@ -1,12 +1,12 @@
 ---
 title: "About Rupesh "
 description: "Description"
-pubDate: "2024-08-17 09:30:00"
+pubDate: "2024-08-18 09:30:00"
 category: "life"
 banner: "@images/banners/_1554874559_RUE1L2EnwC.png"
 tags: ["life"]
 oldViewCount: 8084
-oldKeywords: ["Godruoyi,二愣的闲谈杂鱼"]
+oldKeywords: ["Rupesh Sardar"]
 ---
 
 Welcome to my digital space! I'm Rupesh Sardar, an Application Security Engineer and Penetration Tester driven by a deep passion for cybersecurity. My journey through the realms of programming and cutting-edge cybersecurity tools has empowered me to excel in bug bounty hunting and the intricate world of malware analysis.
