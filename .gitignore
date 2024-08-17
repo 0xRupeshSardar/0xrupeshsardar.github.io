@@ -20,3 +20,4 @@ pnpm-debug.log*
 
 .vscode
 git_auto.sh
+.gitignore
