@@ -17,8 +17,11 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
-
+.env.example
 .vscode
 git_auto.sh
+
+
+
 .gitignore
-.env.example
+# See https://help.github.com/ignore-files/ for more about ignoring files.
