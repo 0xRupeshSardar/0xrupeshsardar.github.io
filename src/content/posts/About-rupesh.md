@@ -3,7 +3,7 @@ title: "About Rupesh "
 description: "Description"
 pubDate: "2024-08-17 12:44:00"
 category: "life"
-banner: "@images/banners/_1554874559_RUE1L2EnwC.png"
+banner: "@images/banners/rupesh.jpeg"
 tags: ["life"]
 oldViewCount: 8084
 oldKeywords: ["Rupesh Sardar"]
