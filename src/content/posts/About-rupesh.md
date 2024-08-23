@@ -20,10 +20,10 @@ Let’s connect and work together to make the digital world a safer place for ev
 
 ---
 
-* **🌐 LinkedIn:** [Rupesh Sardar](https://www.linkedin.com/in/rupesh-sardar/)
+* **📱 LinkedIn:** [Rupesh Sardar](https://www.linkedin.com/in/rupesh-sardar/)
 * **🐦 Twitter:** [@Rupesh_Sardar](https://twitter.com/0xRupesh)
 * **💻 GitHub:** [rupeshsardar](https://github.com/rupeshsardar)
 * **✉️ Email:** [rupeshsardar33@gmail.com](mailto:rupeshsardar33@gmail.com)
-* **🔗 Blog:** [Rupesh Sardar Blog](https://nbitrupesh.tech/)
+* **🌐 Blog:** [Rupesh Sardar Blog](https://nbitrupesh.tech/)
 
 ---

@@ -4,7 +4,6 @@ import type { CollectionEntry } from 'astro:content'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import BlogRecentCard from '@components/blog/BlogRecentCard.astro'
 import BlogSelectedArticle from '@components/blog/BlogSelectedArticle.astro'
-import MainSection from '@components/ui/sections/MainSection.astro'
 import { SITE } from '@/config'
 
 const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
@@ -35,13 +34,6 @@ const URL = Astro.url.href
         },
     }}
 >
-    <MainSection
-        title="Write you want"
-        subTitle="Life can't always be satisfying, but we must continue to live with enthusiasm."
-        btnExists={true}
-        btnTitle="All Posts"
-        btnURL="/timeline"
-    />
 
     <BlogRecentCard blogs={posts} />
     <BlogSelectedArticle posts={selectedPosts} />
