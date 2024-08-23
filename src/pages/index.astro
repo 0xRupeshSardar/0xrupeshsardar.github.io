@@ -14,13 +14,14 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 ---
 
 <BaseLayout>
+    
     <HeroSection
-        title=`Hello, <span class="text-yellow-500 dark:text-yellow-400">Godruoyi</span>`
+        title=`Hello, <span style="color: green;">Everyone</span>`
         subTitle="I'm Rupesh Sardar, an Application Security Engineer and Penetration Tester driven by a deep passion for cybersecurity. My journey through the realms of programming and cutting-edge cybersecurity tools has empowered me to excel in bug bounty hunting and the intricate world of malware analysis."
         primaryBtn="Explore Posts"
         primaryBtnURL="/posts"
         src={blogHeroImg}
-        alt="godruoyi's blog"
+        alt="Rupesh blog"
     />
 
     <FeaturesSection />
@@ -31,7 +32,7 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
                 Latest Post
             </h2>
             <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
-                Always want to write something, but rarely actually do it
+                Always want to write something, but rarely actually do it.
             </p>
         </div>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
