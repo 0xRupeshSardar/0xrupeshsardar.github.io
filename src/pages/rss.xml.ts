@@ -1,6 +1,4 @@
-// copy from https://github.com/delucis/astro-blog-full-text-rss
-// see https://github.com/delucis/astro-blog-full-text-rss/blob/latest/src/pages/rss.xml.ts
-// get more context
+
 
 import { getContainerRenderer as getMDXRenderer } from '@astrojs/mdx'
 import rss, { type RSSFeedItem } from '@astrojs/rss'
@@ -13,20 +11,16 @@ import sanitize from 'ultrahtml/transformers/sanitize'
 import { SITE } from '@/config'
 
 export async function GET(context: APIContext) {
-    // Get the URL to prepend to relative site links. Based on `site` in `astro.config.mjs`.
-    let baseUrl = context.site?.href || 'https://godruoyi.com'
+
+    let baseUrl = context.site?.href || 'https://nbitrupesh.tech'
     if (baseUrl.at(-1) === '/') {
         baseUrl = baseUrl.slice(0, -1)
     }
 
-    // Load MDX renderer. Other renderers for UI frameworks (e.g. React, Vue, etc.) would need adding here if you were using those.
     const renderers = await loadRenderers([getMDXRenderer()])
 
-    // Create a new Astro container that we can render components with.
-    // See https://docs.astro.build/en/reference/container-reference/
     const container = await AstroContainer.create({ renderers })
 
-    // Load the content collection entries to add to our RSS feed.
     const posts = (await getCollection('posts')).sort((a, b) =>
         a.data.pubDate > b.data.pubDate ? -1 : 1,
     )

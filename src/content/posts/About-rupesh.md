@@ -1,6 +1,6 @@
 ---
 title: "About Rupesh "
-description: "Description"
+description: ""
 pubDate: "2024-08-17 12:44:00"
 category: "life"
 banner: "@images/banners/rupesh.jpeg"
@@ -22,7 +22,7 @@ Let’s connect and work together to make the digital world a safer place for ev
 
 * **📱 LinkedIn:** [Rupesh Sardar](https://www.linkedin.com/in/rupesh-sardar/)
 * **🐦 Twitter:** [@Rupesh_Sardar](https://twitter.com/0xRupesh)
-* **💻 GitHub:** [rupeshsardar](https://github.com/rupeshsardar)
+* **💻 GitHub:** [rupeshsardar](https://github.com/0xRupeshSardar)
 * **✉️ Email:** [rupeshsardar33@gmail.com](mailto:rupeshsardar33@gmail.com)
 * **🌐 Blog:** [Rupesh Sardar Blog](https://nbitrupesh.tech/)
 

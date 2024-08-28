@@ -1,4 +1,3 @@
-// https://docs.astro.build/en/guides/integrations-guide/sitemap/#usage
 import type { APIRoute } from 'astro'
 
 const robotsTxt = `
