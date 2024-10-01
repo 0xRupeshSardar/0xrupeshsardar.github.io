@@ -19,9 +19,7 @@ pnpm-debug.log*
 .DS_Store
 .env.example
 .vscode
-git_auto.sh
+*.sh
 
 
 
-.gitignore
-# See https://help.github.com/ignore-files/ for more about ignoring files.
