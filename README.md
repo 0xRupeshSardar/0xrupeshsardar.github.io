@@ -1,6 +1,8 @@
 # 0xrupeshsardar.github.io
 
-A high-end, modern static blog built with React, optimized for GitHub Pages. Features exceptional UI polish, smooth micro-interactions, and an outstanding reading experience.
+A high-end, modern tech dashboard built with React, featuring an animated security-themed matrix background. Optimized for GitHub Pages with exceptional UI polish and smooth animations.
+
+🔗 **Live Site**: https://0xrupeshsardar.github.io/
 
 ## ✨ Features
 
