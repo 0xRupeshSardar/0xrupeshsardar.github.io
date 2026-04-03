@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import About from './pages/About';
 import BlogPost from './pages/BlogPost';
+import PayloadsGallery from './pages/PayloadsGallery';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
+          <Route path="/payloads" element={<PayloadsGallery />} />
           <Route path="/post/:slug" element={<BlogPost />} />
         </Routes>
       </AnimatePresence>

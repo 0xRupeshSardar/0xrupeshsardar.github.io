@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 @layer base {
   body {
     @apply bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
   }
 
   html {
@@ -73,7 +73,15 @@
   }
 
   .glass-effect {
-    @apply bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/50;
+    @apply bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50;
+  }
+
+  .card {
+    @apply bg-white/90 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200/80 dark:border-zinc-700/80 shadow-lg shadow-zinc-200/50 dark:shadow-black/20 transition-all duration-300;
+  }
+
+  .card-tech {
+    @apply card hover:shadow-lg hover:border-violet-400/30 dark:hover:border-violet-500/30;
   }
 }
 

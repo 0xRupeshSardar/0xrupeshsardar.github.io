@@ -20,58 +20,35 @@ const Blog = () => {
     <Layout>
       <TechBackground />
       
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header Section */}
+      <div className="max-w-4xl mx-auto px-6">
         <motion.section
-          className="py-16 md:py-24"
-          initial={{ opacity: 0, y: 20 }}
+          className="pt-24 pb-12 flex flex-col md:flex-row md:items-center gap-6"
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect mb-6 text-sm font-medium text-primary-600 dark:text-primary-400"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-              Technical Blog
-            </motion.div>
-
-            <motion.h1
-              className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-zinc-50 mb-6 tracking-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              Latest{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-blue-600">
-                Insights
-              </span>
-            </motion.h1>
-
-            <motion.p
-              className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              Thoughts on development, design, and technology. Deep dives into modern web development practices and innovations.
-            </motion.p>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">Blog</span>
+            </h1>
+            <p className="text-zinc-600 dark:text-zinc-400">
+              Thoughts on development, design, and technology.
+            </p>
           </div>
+          <img
+            src="https://media.giphy.com/media/3o7TKsQ8MJHyTASOry/giphy.gif"
+            alt="Code"
+            className="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover border border-violet-200/50 dark:border-violet-600/30"
+          />
         </motion.section>
 
-        {/* Blog Posts Grid */}
         <motion.section
-          className="py-12 mb-24"
+          className="pb-24"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <div className="grid grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 gap-6">
             {blogPosts.map((post, index) => (
               <motion.div
                 key={index}
@@ -92,11 +69,11 @@ const Blog = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-zinc-100 dark:bg-zinc-800 mb-6">
-                <svg className="w-10 h-10 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
+              <img
+                src="https://media.giphy.com/media/26n7b7PjSOZJwvAtW/giphy.gif"
+                alt="Coding"
+                className="w-32 h-32 mx-auto mb-6 rounded-2xl object-cover"
+              />
               <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mb-3">
                 No posts yet
               </h3>

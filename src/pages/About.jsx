@@ -37,60 +37,42 @@ const About = () => {
     <Layout>
       <TechBackground />
       
-      <div className="max-w-5xl mx-auto px-6">
-        {/* Header Section */}
+      <div className="max-w-4xl mx-auto px-6">
         <motion.section
-          className="py-16 md:py-24"
-          initial={{ opacity: 0, y: 20 }}
+          className="pt-24 pb-12"
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="text-center mb-16">
-            <motion.div
-              className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-primary-500 to-blue-600 flex items-center justify-center text-white text-4xl font-bold shadow-2xl"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              whileHover={{ scale: 1.05, rotate: 5 }}
-            >
-              RS
-            </motion.div>
-
-            <motion.h1
-              className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-zinc-50 mb-6 tracking-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              About{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-blue-600">
-                Me
-              </span>
-            </motion.h1>
-
-            <motion.p
-              className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              Hi, I'm <strong className="text-zinc-900 dark:text-zinc-50">Rupesh Sardar</strong>, a passionate software engineer 
-              specializing in building exceptional digital experiences. I focus on creating scalable, 
-              secure, and user-friendly applications using modern technologies.
-            </motion.p>
+          <div className="flex flex-col md:flex-row md:items-center gap-8 mb-16">
+            <div className="flex items-center gap-4">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-500/20 border-2 border-violet-300/50 dark:border-violet-500/30 flex items-center justify-center text-violet-600 dark:text-violet-400 text-2xl font-bold shrink-0">
+                RS
+              </div>
+              <img src="https://media.giphy.com/media/Is1O1TWV0LEJn/giphy.gif" alt="" className="w-20 h-20 rounded-xl object-cover border border-violet-200/50 dark:border-violet-600/30 hidden sm:block" />
+            </div>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="text-zinc-900 dark:text-zinc-50">About </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">me</span>
+            </h1>
+              <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Hi, I'm <strong className="text-zinc-900 dark:text-zinc-50">Rupesh Sardar</strong>, a software engineer 
+                building scalable, secure applications with modern technologies.
+              </p>
+            </div>
           </div>
 
-          {/* Bio */}
           <motion.div
-            className="glass-effect rounded-2xl p-8 md:p-12 mb-16 border border-zinc-200/50 dark:border-zinc-800/50"
+            className="card-tech p-8 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-6">
+            <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-6">
               My Journey
             </h2>
-            <div className="space-y-4 text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed">
+            <div className="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
               <p>
                 With over 5 years of experience in software development, I've had the privilege of working 
                 on diverse projects ranging from enterprise applications to startup MVPs. My journey in tech 
@@ -114,15 +96,15 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-8">
-            Technical Skills
+          <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-6">
+            Skills
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
-                className="glass-effect rounded-xl p-6 border border-zinc-200/50 dark:border-zinc-800/50"
+                className="card-tech p-5"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -132,13 +114,13 @@ const About = () => {
                   <span className="font-semibold text-zinc-900 dark:text-zinc-50">
                     {skill.name}
                   </span>
-                  <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
+                  <span className="text-sm font-medium text-violet-600 dark:text-violet-400">
                     {skill.level}%
                   </span>
                 </div>
                 <div className="h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full bg-gradient-to-r from-primary-600 to-blue-600 rounded-full"
+                    className="h-full bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}
@@ -158,15 +140,15 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-8">
+          <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-6">
             Experience
           </h2>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {experience.map((exp, index) => (
               <motion.div
                 key={index}
-                className="glass-effect rounded-2xl p-8 border border-zinc-200/50 dark:border-zinc-800/50 hover:shadow-xl transition-all duration-300"
+                className="card-tech p-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -196,39 +178,36 @@ const About = () => {
 
         {/* Contact CTA */}
         <motion.section
-          className="text-center py-16 mb-16"
+          className="py-12 mb-24"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="glass-effect rounded-2xl p-12 border border-zinc-200/50 dark:border-zinc-800/50">
-            <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
-              Let's Connect
+          <div className="card-tech p-8 text-center">
+            <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnxG/giphy.gif" alt="" className="w-20 h-20 mx-auto mb-4 rounded-xl object-cover" />
+            <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-3">
+              Let's connect
             </h2>
-            <p className="text-lg text-zinc-700 dark:text-zinc-300 mb-8 max-w-2xl mx-auto">
-              Interested in collaborating or just want to say hi? Feel free to reach out!
+            <p className="text-zinc-600 dark:text-zinc-400 mb-6 max-w-xl mx-auto">
+              Interested in collaborating or just want to say hi?
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <motion.a
+              <a
                 href="mailto:hello@rupeshsardar.dev"
-                className="px-8 py-4 bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-medium rounded-xl hover:from-violet-500 hover:to-fuchsia-500 transition-all"
               >
                 Get in Touch
-              </motion.a>
+              </a>
               
-              <motion.a
-                href="https://github.com"
+              <a
+                href="https://github.com/0xRupeshSardar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 glass-effect hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-50 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="px-6 py-3 border-2 border-violet-300/60 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 font-medium rounded-xl hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-colors"
               >
-                View GitHub
-              </motion.a>
+                GitHub
+              </a>
             </div>
           </div>
         </motion.section>
