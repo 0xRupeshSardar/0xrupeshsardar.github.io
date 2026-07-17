@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
-
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 
 const PostHeader = ({ post, formattedDate, locked, onUnlock }) => {
   const [password, setPassword] = useState('');
