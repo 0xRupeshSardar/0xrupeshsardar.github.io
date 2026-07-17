@@ -18,7 +18,7 @@ const PostHeader = ({ post, formattedDate, locked, onUnlock }) => {
   };
 
   return (
-    <div className="post-header">
+    <div className="post-header-card">
       <div className="post-meta">
         {post.tag && !post.private && <span className="post-tag">{post.tag}</span>}
         <time>{formattedDate}</time>
