@@ -24,7 +24,7 @@
   --scroll-btn-bg: rgba(19,19,26,0.9);
   --bg-overlay-from: rgba(19,19,26,0);
   --bg-overlay-to: #13131a;
-  --bg-focus: rgba(19,19,26,0.72);
+  --bg-focus: rgba(14,14,20,0.92);
   --scrollbar-thumb: rgba(75,85,99,0.5);
   --star-color: 255,255,255;
   --star-opacity: 1;
@@ -50,7 +50,7 @@
   --scroll-btn-bg: rgba(232,235,242,0.9);
   --bg-overlay-from: rgba(232,235,242,0);
   --bg-overlay-to: #e8ebf2;
-  --bg-focus: rgba(232,235,242,0.8);
+  --bg-focus: rgba(210,215,228,0.94);
   --scrollbar-thumb: rgba(0,0,0,0.18);
   --star-color: 90,90,115;
   --star-opacity: 0.5;
