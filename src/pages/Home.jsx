@@ -245,7 +245,10 @@ const Home = () => {
                     </div>
 
                     <p style={{ fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '32px', maxWidth: '550px' }}>
-                      I specialize in <span className="text-gradient">cybersecurity</span>, <span className="text-gradient">ethical hacking</span>, and <span className="text-gradient">penetration testing</span>. As a passionate content creator, I share tutorials and insights into vulnerability discovery, red teaming, and secure application development.
+                      I specialize in <span className="text-gradient">exploit development</span>, <span className="text-gradient">reverse engineering</span>, <span className="text-gradient">penetration testing</span>, <span className="text-gradient">red teaming</span>, and <span className="text-gradient">application security</span>. I'm passionate about vulnerability research, binary analysis, operating system internals, and offensive security.
+                    </p>
+                    <p style={{ fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '32px', maxWidth: '550px' }}>
+                      This website contains my research, technical blogs, write-ups, tools, and experiments as I continue exploring cybersecurity and sharing what I learn.
                     </p>
 
                     {/* Mini tech typewriter */}
