@@ -1,21 +1,12 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable react-refresh/only-export-components -- hook + context file, not a component module */
+import { createContext, useContext } from 'react';
+
+const ThemeContext = createContext();
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved || 'light';
-  });
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-  return { theme, toggleTheme };
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error('useTheme must be used within ThemeProvider');
+  return ctx;
 };
+
+export { ThemeContext };

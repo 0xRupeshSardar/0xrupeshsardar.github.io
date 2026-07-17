@@ -5,13 +5,16 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/',
+  optimizeDeps: {
+    include: ['react/jsx-runtime'],
+  },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'framer-motion': ['framer-motion'],
-          'markdown': ['react-markdown', 'rehype-highlight', 'rehype-raw', 'remark-gfm'],
+          'markdown': ['react-markdown', 'rehype-highlight', 'remark-gfm'],
         },
       },
     },

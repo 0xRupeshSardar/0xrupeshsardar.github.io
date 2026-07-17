@@ -1,134 +1,225 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 
 const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/blog', label: 'Blog' },
-  { to: '/payloads', label: 'Payloads' },
-  { to: '/about', label: 'About' },
+  { label: 'Home', path: '/' },
+  { label: 'Blog', path: '/blog' },
 ];
 
+const SunIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 18, height: 18 }}>
+    <circle cx="12" cy="12" r="5" />
+    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+  </svg>
+);
+
+const MoonIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 18, height: 18 }}>
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+  </svg>
+);
+
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
-  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (location.pathname === '/') {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  };
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- close mobile menu on navigation
+    setMenuOpen(false);
+  }, [location]);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const headingColor = 'var(--text-heading)';
 
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800"
-    >
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/">
-            <motion.div
-              className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              0x<span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500 dark:from-violet-400 dark:to-cyan-400">rupesh</span>
-            </motion.div>
+    <header style={{ position: 'relative', zIndex: 999 }}>
+      <div className="container" style={{ position: 'relative' }}>
+        <nav style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: scrolled ? '64px' : '72px',
+          marginTop: '16px',
+          padding: '0 24px',
+          border: '1px solid var(--border-color)',
+          borderRadius: 'var(--radius-lg)',
+          background: scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
+          backdropFilter: 'blur(20px)',
+          transition: 'all 300ms ease',
+          position: 'relative',
+          width: '100%',
+        }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+            <span style={{
+              fontFamily: 'var(--primary-font)',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              color: headingColor,
+            }}>
+              0xRupesh
+            </span>
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map(({ to, label }) => (
-              <Link key={to} to={to}>
-                <motion.span
-                  className="text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {label}
-                </motion.span>
+          <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            {navLinks.map(({ label, path }) => (
+              <Link
+                key={label}
+                to={path}
+                style={{
+                  fontFamily: 'var(--primary-font)',
+                  fontSize: '0.85rem',
+                  fontWeight: 400,
+                  color: location.pathname === path ? headingColor : 'var(--text-secondary)',
+                  transition: 'color 0.2s',
+                  textDecoration: 'none',
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = headingColor}
+                onMouseLeave={e => {
+                  if (location.pathname !== path) e.currentTarget.style.color = 'var(--text-secondary)';
+                }}
+              >
+                {label}
               </Link>
             ))}
-            <motion.button
-              onClick={toggleTheme}
-              className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? (
-                <svg className="w-5 h-5 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              )}
-            </motion.button>
+            <button onClick={toggleTheme} className="theme-toggle" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            </button>
+            <a href="#contact" onClick={handleContactClick} style={{
+              padding: '6px 16px',
+              background: 'linear-gradient(135deg, var(--primary-color), var(--gradient-color))',
+              color: 'var(--bg-dark)',
+              borderRadius: 'var(--radius-sm)',
+              fontFamily: 'var(--primary-font)',
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              transition: 'all 200ms ease',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}>
+              Contact
+            </a>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex md:hidden items-center gap-2">
-            <motion.button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800"
-              whileTap={{ scale: 0.95 }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? (
-                <svg className="w-5 h-5 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              )}
-            </motion.button>
-            <motion.button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-              whileTap={{ scale: 0.95 }}
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? (
-                <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Mobile dropdown */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="pt-4 pb-2 space-y-1 border-t border-zinc-200 dark:border-zinc-800 mt-4">
-                {navLinks.map(({ to, label }) => (
-                  <Link
-                    key={to}
-                    to={to}
-                    onClick={() => setMobileOpen(false)}
-                    className="block py-3 px-4 rounded-xl text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          {/* Hamburger button */}
+          <button
+            className="hamburger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              display: 'none',
+              flexDirection: 'column',
+              gap: '5px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '8px',
+              zIndex: 1001,
+            }}
+          >
+            {[0, 1, 2].map(i => (
+              <span key={i} style={{
+                display: 'block',
+                width: '22px',
+                height: '2px',
+                background: headingColor,
+                borderRadius: '1px',
+                transition: 'all 0.3s ease',
+                transform: menuOpen && i === 0 ? 'rotate(45deg) translate(5px, 5px)' : menuOpen && i === 2 ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
+                opacity: menuOpen && i === 1 ? 0 : 1,
+              }} />
+            ))}
+          </button>
+        </nav>
       </div>
-    </motion.nav>
+
+      {/* Mobile menu overlay */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'var(--nav-mobile-overlay)',
+        backdropFilter: 'blur(20px)',
+        zIndex: 998,
+        display: menuOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '32px',
+      }}>
+        {navLinks.map(({ label, path }) => (
+          <Link
+            key={label}
+            to={path}
+            onClick={() => setMenuOpen(false)}
+            style={{
+              fontFamily: 'var(--primary-font)',
+              fontSize: '1.5rem',
+              fontWeight: 500,
+              color: location.pathname === path ? headingColor : 'var(--text-secondary)',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+          >
+            {label}
+          </Link>
+        ))}
+        <button onClick={toggleTheme} className="theme-toggle" style={{ padding: '10px', marginTop: '8px' }} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          <span style={{ marginLeft: '8px', fontSize: '0.9rem', fontFamily: 'var(--primary-font)' }}>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+        </button>
+        <a
+          href="#contact"
+          onClick={handleContactClick}
+          style={{
+            padding: '12px 32px',
+            background: 'linear-gradient(135deg, var(--primary-color), var(--gradient-color))',
+            color: 'var(--bg-dark)',
+            borderRadius: 'var(--radius-sm)',
+            fontFamily: 'var(--primary-font)',
+            fontSize: '1rem',
+            fontWeight: 500,
+            textDecoration: 'none',
+            marginTop: '8px',
+            cursor: 'pointer',
+          }}
+        >
+          Contact
+        </a>
+      </div>
+    </header>
   );
 };
 

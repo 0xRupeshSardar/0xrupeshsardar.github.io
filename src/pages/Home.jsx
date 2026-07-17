@@ -1,213 +1,475 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
-import TechBackground from '../components/TechBackground';
-import StatCard from '../components/StatCard';
+import Typewriter from '../components/Typewriter';
+import Counter from '../components/Counter';
+import posts from '../data/posts';
+
+const skills = [
+  { file: 'aws', name: 'AWS' },
+  { file: 'caido', name: 'Caido' },
+  { file: 'azure', name: 'Azure' },
+  { file: 'kali', name: 'Kali' },
+  { file: 'wireshark', name: 'Wireshark' },
+  { file: 'postman', name: 'Postman' },
+  { file: 'burp', name: 'Burp Suite' },
+  { file: 'python', name: 'Python' },
+  { file: 'owasp-zap', name: 'OWASP ZAP' },
+  { file: 'nmap', name: 'Nmap' },
+  { file: 'linux', name: 'Linux' },
+  { file: 'ghidraa', name: 'Ghidra' },
+  { file: 'go', name: 'Go' },
+  { file: 'docker', name: 'Docker' },
+  { file: 'tenb', name: 'Tenable' },
+  { file: 'metasploite', name: 'Metasploit' },
+  { file: 'mitmproxy', name: 'Mitmproxy' },
+];
+
+const heroTechs = ['AWS', 'GCP', 'Caido', 'Kali Linux', 'Wireshark', 'Postman', 'Burp Suite', 'Python', 'OWASP ZAP', 'Nmap', 'Linux', 'Ghidra', 'Go', 'Docker', 'Tenable', 'Metasploit', 'mitmproxy'];
+
+const stats = [
+  { value: 4, label: 'Years Experience' },
+  { value: 9, label: 'Companies Hacked' },
+  { value: 35, label: 'Vulnerabilities Discovered' },
+  { value: 2, label: 'Certifications Achieved' },
+  { value: 0, label: 'CVEs Assigned' },
+];
+
+// Recent Activity is derived from blog posts — it updates automatically when a new post is added.
+const activityFeed = posts
+  .slice()
+  .sort((a, b) => new Date(b.date) - new Date(a.date))
+  .slice(0, 5)
+  .map(p => ({
+    slug: p.slug,
+    date: new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    text: `Published — ${p.title}`,
+  }));
+
+const expertise = [
+  { title: 'API Security Testing', desc: 'In-depth testing to uncover vulnerabilities in APIs and secure data transmission.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 28, height: 28 }}><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg> },
+  { title: 'Web Application Security', desc: 'Identifying and patching vulnerabilities like authentication bypasses and business logic flaws.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 28, height: 28 }}><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" /></svg> },
+  { title: 'Network Security Audits', desc: 'Assessing network infrastructure to ensure robust security measures.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 28, height: 28 }}><path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg> },
+  { title: 'Cloud Security', desc: 'Ensuring secure configurations and policies for cloud platforms like AWS and Azure.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 28, height: 28 }}><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg> },
+  { title: 'Red Team Operations', desc: 'Simulating advanced attack scenarios to identify and strengthen weak points in systems.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 28, height: 28 }}><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg> },
+  { title: 'Vulnerability Assessment', desc: 'Comprehensive analysis of applications and systems to discover complex security risks.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} style={{ width: 28, height: 28 }}><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg> },
+];
+
+const education = [
+  { date: 'Early 2027', title: 'Offensive Security Certified Professional (OSCP)', org: 'Offensive Security', upcoming: true },
+  { date: 'Sept 2026', title: 'Certified Penetration Testing Specialist (CPTS)', org: 'Hack The Box', upcoming: true },
+  { date: 'Aug 2021 – Jul 2023', title: "Master's in Computer Science", org: 'Visva-Bharati' },
+  { date: 'Jan 2017 – Dec 2020', title: "Bachelor's in Computer Science", org: 'Visva-Bharati' },
+];
+
+const experience = [
+  {
+    period: 'May 2025 - Present',
+    title: 'Security Researcher (Contract · NDA)',
+    bullets: [
+      'Exploit development & vulnerability research',
+      'Reverse engineering of proprietary binaries',
+      'Full-scope penetration testing',
+      'Red team operations & adversary simulation',
+      'Secure code review & patch verification',
+    ],
+  },
+  {
+    period: 'Apr 2024 - Aug 2024',
+    title: 'Malware Analyst (Contract · NDA)',
+    bullets: [
+      'Malware reverse engineering & triage',
+      'YARA rule authoring & detection tuning',
+      'Threat actor TTP identification',
+    ],
+  },
+  {
+    period: 'Jul 2020 - Oct 2021',
+    title: 'Security Engineer',
+    bullets: [
+      'Full-time penetration testing & security assessments',
+      'Web application & API vulnerability assessments',
+      'Security advisory & remediation guidance',
+    ],
+  },
+];
+
+const socialLinksContact = [
+  { label: 'GitHub', handle: '@0xRupeshSardar', href: 'https://github.com/0xRupeshSardar', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 26, height: 26 }}><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> },
+  { label: 'LinkedIn', handle: '@rupesh-sardar', href: 'https://linkedin.com/in/rupesh-sardar', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 26, height: 26 }}><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" /></svg> },
+  { label: 'X (Twitter)', handle: '@0xRupesh', href: 'https://x.com/0xRupesh', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 26, height: 26 }}><path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg> },
+  { label: 'Instagram', handle: '@0xrupesh', href: 'https://www.instagram.com/0xrupesh/', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 26, height: 26 }}><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg> },
+];
+
+// ASCII profile art (shown until a real profile photo is added at /images/profile.webp)
+const ASCII_ART = `................................-----+++++++++++++-.................................................
+.....................................----+++++++++++++--............................................
+...........................................---+++++++++++++--.......................................
+........................................---..-.--+++++++++++++++-...................................
+.....................................-+++++####++++######++++++++++---..............................
+..................................--+######################+++++++++++++--..........................
+..............................-+-+###########################++++++++++++++++--.....................
+............................+---########++------------+++#######+-----+++++++++++---..............--
+...........................-++########+------..-----------++#######......----++++++++---.......--+++
+........................-.-+#+######++--........-...-------+++#####++.........-----++++++++---+++++-
+......................-.-+++########---...........-..-------++#####+++-............---++++++++++--..
+....................-++#+##########+--................------+++######++.................---++--.....
+.....................--+-######+###+--..................-----+++#######+............................
+..................---++-+++########+--...................-----++####+##+............................
+.................-+++----##########---................---++--+++####+##+#---........................
+.................-+-+---++#########+-+++++----....---++####++-+++#######+-..........................
+.................-------##########+-----+++++------+++++-+###+-++########++-........................
+.................+.--..++########++#-..-.----#+++++#-------+-++-#########+---.......................
+.................--.--+++########-----#++-++..----+-++------+++-+#########++-.......................
+..................-.--++#########-----++++----#---++----+-------+#########++--......................
+-.......--.......-..+#+++########+---------..-+...-+------------++##++######+-......................
+.........--....-.----+++#########+-..........+......#-----......-+##+#####++++-.-...................
+..........-...-..+-..+++#########++.........-.........-#++##...--###########+---....................
+........--.....---...+++#########+---.....-..--.---+#----......--###########++--....................
+...............-+-.--++#####+##+##+--.......--..-------.......-+-#########+-+#++.--.-...............
+.........-......---++#############+--.........-+---+---......---+##########++#-++-..-...............
+.........-.....-++++++#############+--.....------++++--++-------############++--++....-.............
+.........-...---+---++##############+---+++-++++++++++#++++----#############++-+++.-....-...........
+.........-..-++++##+++##############++----+------------------+######+#######++-..+---..-............
+.............-.+-++++++##+++##########+---------+++++-------+###############+----+-.................
+............---++##+#++++##############+-------------------+#######+########+##+-----...............
+........-......++++#-++##################++--..----------+##############++###++++---.-..............
+........-...-+++++######+#+++##########+++#------------++##################+#+++.---................
+........-...+++.-+#++#################++++-+##+++################+###+#++####+#++...................
+............-++--+-+#+#####+##########+++-----++++++++++###############+##+.##++-...--..............
+...........--+++#+++++################+++------+++++++++##############+#++++++#+--..................
+....-------++++#+++###################++++-------+++++++########+#######+#++##+++....--.............
+..---+++++++++++++++###################+++-----------++##########+#++##++##++##++++--...............
+---+++++++++#####+#++##++###############++-----------++################+#####+#+##+++---............
+---+-+++++++++#+#####+##################+++++-------+###########+#########++##++##+#+-++--..........
++--+++++++####++#+#+####################++++#+++++####++#######+##############++##+#++#-++--........
++++-+-+++++##++++###+###++#####+++####+++++++++++++#+#+++++######+++########++++##+++#+++-+---......
++++++++++++###++##+##+#++#####-++++##++++++++++++++++##+++++######++####+##+###+###+##++++++----....
+-+##++++++++##+-++#+##++-++###..++++#+++++++++++++++#++++++#####+##+##+#+++##++##+###++#++++++--....
+-++#++++#++###++++--##++-.-+++..+-++++#++++++++-++++#++++++#+++####+##++-+--+#+#####++#++++++-------
+++++#+#+#+++##++---#+++---+-+--+++++++#+#++++++++++++++++++#++++#+++##---.--+#++#####+++#++++-++----
++++++###+#+++#-...---........-.---#+++#++++++++++++#++++++#++++++#++##+--..--##########+++++++------
+++++++##+#++##+-----.--.-.-..-.--+++++##++++++++++++++++++#+++++##++-##+-----#########++++++++-+----
+++##+++###+++#----..--..-.--.-...-.#+++#++++++++++++++++++#+++++#++++##++++++#########+++++++++++++-
+++#++#####+++#+..--.--.-......--..+##++#+++-++++++++++++++++++++##+++##++++++########+#+++++++++++++
++++++##+##++##+-..-----++++------++##+++####+##+#+++++++++#+++#+##+++##++++++########+++++++++++++++
++++++++###++##++-+++++-+------.--++###++#++#+#+##+#++++++++++++#+++++###++++##########++++++++++++++
++++#++####+###++-+++-++++-+-----++++##+++##+###++##+++++++##+#++++++###+++++#########+#+++++++++++++
+++++##########+++-++++#+--.-..--++++###++######+#+#+++++##+####+#+++###+++++#############+++++++++++
++++++#########+++--++----+--.---+++++###++#####+###++-++#+####+++++####+++++#############+++++++++++
+++++#+########+++.-+++.-....----++++++###+########++##++#+####+++++####++++################+++++++++
+++++#++##########++.+........++------------##..###++++++.#####++++####+++++###############++++++++++
+++++#############+++#+++++-++++++----------##....+-+-++###-+.+.-+#####+++######-++############+#++++
++++++############+###+++++++++-+++++++++++##....#++++...####+++++####+++++#####++++++######+++++++++
+++++#################++++++++++++++++++++######++++++++#####++++####+++++######++++++-+#######++++++
+++++################++++++++++++++++++++++####++++++++#####+++++#####+++++######+++---++#########+++
+
+`;
 
 const Home = () => {
-  const stats = [
-    {
-      icon: (
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-      label: 'Security',
-      value: '98%',
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      label: 'Performance',
-      value: '99.9%',
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-        </svg>
-      ),
-      label: 'Projects',
-      value: '24',
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      ),
-      label: 'Quality',
-      value: 'A+',
-    },
-  ];
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
-  const features = [
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-        </svg>
-      ),
-      title: 'Modern Stack',
-      description: 'React, Vite, Tailwind — fast & maintainable.',
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-        </svg>
-      ),
-      title: 'Security First',
-      description: 'Best practices for reliable apps.',
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      title: 'Fast & Optimized',
-      description: 'Code splitting, lazy loading.',
-    },
-  ];
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.message) return;
+    setSending(true);
+    // Replace with Formspree/API endpoint for real submission
+    setTimeout(() => {
+      setSending(false);
+      setSent(true);
+      setForm({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSent(false), 4000);
+    }, 600);
+  };
 
   return (
     <Layout>
-      <TechBackground />
-
-      <div className="max-w-5xl mx-auto px-6">
-        {/* Hero with GIF */}
-        <motion.section
-          className="pt-24 pb-16 md:pt-32 md:pb-24 flex flex-col md:flex-row md:items-center md:justify-between gap-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex-1">
-            <motion.div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 text-sm font-medium mb-6 border border-violet-200/50 dark:border-violet-700/50"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              Building in public
-            </motion.div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-              <span className="text-zinc-900 dark:text-zinc-50">Hi, I'm </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400">
-                Rupesh
-              </span>
-            </h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 max-w-xl">
-              Software engineer writing about development, security, and building things on the web.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/blog">
-                <motion.button
-                  className="px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-semibold rounded-xl shadow-lg shadow-violet-500/25 transition-all"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Read blog
-                </motion.button>
-              </Link>
-              <Link to="/about">
-                <motion.button
-                  className="px-6 py-3 border-2 border-violet-300/60 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 font-medium rounded-xl hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-colors"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  About me
-                </motion.button>
-              </Link>
-            </div>
-          </div>
-          {/* Fun GIF */}
-          <motion.div
-            className="flex-shrink-0"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
-            <div className="relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-violet-500/20 to-cyan-500/20 rounded-2xl blur-xl" />
-              <img
-                src="https://media.giphy.com/media/Ll22OhMLAlVDb8UQWe/giphy.gif"
-                alt="Coding"
-                className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover border-2 border-white/20 dark:border-zinc-600/50 shadow-xl"
-              />
-            </div>
-          </motion.div>
-        </motion.section>
-
-        {/* Stats with mini GIFs */}
-        <motion.section
-          className="py-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-            <img src="https://media.giphy.com/media/13GIgrGdslD9oQ/giphy.gif" alt="" className="w-16 h-16 rounded-lg object-cover" />
-            <img src="https://media.giphy.com/media/1msUUPpzwsguI/giphy.gif" alt="" className="w-16 h-16 rounded-lg object-cover" />
-            <img src="https://media.giphy.com/media/l0HlNaQ6gWfllOxDO/giphy.gif" alt="" className="w-16 h-16 rounded-lg object-cover" />
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {stats.map((stat, i) => (
-              <StatCard key={i} {...stat} delay={0.1 * i} />
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Features */}
-        <motion.section
-          className="py-16 mb-24"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-        >
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
-            What I focus on
-          </h2>
-          <p className="text-zinc-500 dark:text-zinc-400 mb-8">Tech stack & philosophy</p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {features.map((feature, i) => {
-              const gifs = [
-                'https://media.giphy.com/media/2Ygy0khwewLdMS3KHm/giphy.gif',
-                'https://media.giphy.com/media/KEYQOgB5cL2Hi/giphy.gif',
-                'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif',
-              ];
-              return (
-              <motion.div
-                key={i}
-                className="card-tech p-6"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <img src={gifs[i]} alt="" className="w-12 h-12 rounded-lg object-cover border border-violet-200/50" />
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500/20 to-cyan-500/20 flex items-center justify-center text-violet-600 dark:text-violet-400 border border-violet-200/50 dark:border-violet-500/20">
-                    {feature.icon}
+      {/* ── HERO SECTION ── */}
+      <section style={{ paddingTop: '16px', paddingBottom: '24px' }}>
+        <div className="container">
+          <div className="section-box">
+            <div className="section-box-inner">
+              <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '5fr 6fr', alignItems: 'end', padding: '48px 48px 48px 0' }}>
+                {/* Image column — framed profile picture */}
+                <div className="hero-image-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: '48px' }}>
+                  <div style={{ position: 'relative', width: 'clamp(220px, 26vw, 340px)', aspectRatio: '1 / 1' }}>
+                    {/* Frame + image/placeholder */}
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      border: '1px solid var(--border-color)',
+                      borderRadius: 'var(--radius-lg)',
+                      overflow: 'hidden',
+                      background: 'var(--bg-card)',
+                      containerType: 'inline-size',
+                    }}>
+                      {!imgError ? (
+                        <img
+                          src="/images/profile.webp"
+                          alt="0xRupesh"
+                          onError={() => setImgError(true)}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(var(--primary-color-rgb),0.08), rgba(var(--primary-color-rgb),0.02))' }}>
+                          <pre className="ascii-art" aria-label="0xRupesh ASCII art">{ASCII_ART}</pre>
+                        </div>
+                      )}
+                    </div>
+                    {/* Viewfinder corner brackets */}
+                    {[
+                      { top: -1, left: -1, borderTop: '2px solid var(--primary-color)', borderLeft: '2px solid var(--primary-color)', borderRadius: 'var(--radius-lg) 0 0 0' },
+                      { top: -1, right: -1, borderTop: '2px solid var(--primary-color)', borderRight: '2px solid var(--primary-color)', borderRadius: '0 var(--radius-lg) 0 0' },
+                      { bottom: -1, left: -1, borderBottom: '2px solid var(--primary-color)', borderLeft: '2px solid var(--primary-color)', borderRadius: '0 0 0 var(--radius-lg)' },
+                      { bottom: -1, right: -1, borderBottom: '2px solid var(--primary-color)', borderRight: '2px solid var(--primary-color)', borderRadius: '0 0 var(--radius-lg) 0' },
+                    ].map((s, i) => (
+                      <span key={i} style={{ position: 'absolute', width: '24px', height: '24px', ...s }} />
+                    ))}
                   </div>
                 </div>
-                <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  {feature.description}
-                </p>
-              </motion.div>
-              );
-            })}
+
+                {/* Content column */}
+                <div style={{ padding: '0 48px' }}>
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+                    <div className="typewriter" style={{ marginBottom: '8px' }}>
+                      <h1 style={{ fontSize: '0.95rem', fontWeight: 500 }}>Hey, I'm 0xRupesh</h1>
+                    </div>
+
+                    <div className="hero-typewriter" style={{ marginBottom: '20px' }}>
+                      <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', fontWeight: 500, lineHeight: 1.1 }}>
+                        a <span className="text-gradient">{'{'}<Typewriter texts={['Security Researcher', 'Penetration Tester', 'Bug Bounty Hunter', 'Red Teamer', 'Kernel Security', 'Ethical Hacker', 'Cloud Security Analyst', 'Code Review', 'Vulnerability Researcher', 'Exploit Development']} speed={70} delay={2200} hideCursor />{'}'}</span><span className="flicker">_</span>
+                      </h1>
+                    </div>
+
+                    <p style={{ fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '32px', maxWidth: '550px' }}>
+                      I specialize in <span className="text-gradient">cybersecurity</span>, <span className="text-gradient">ethical hacking</span>, and <span className="text-gradient">penetration testing</span>. As a passionate content creator, I share tutorials and insights into vulnerability discovery, red teaming, and secure application development.
+                    </p>
+
+                    {/* Mini tech typewriter */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '4px' }}>
+                      <span style={{ fontSize: '0.9rem', color: 'var(--primary-color)', fontFamily: 'var(--primary-font)', fontWeight: 500 }}>$</span>
+                      <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontFamily: 'var(--primary-font)' }}>
+                        <Typewriter texts={heroTechs} speed={80} delay={1500} />
+                      </span>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
           </div>
-        </motion.section>
-      </div>
+        </div>
+      </section>
+
+      {/* ── STATS ── */}
+      <section style={{ padding: '48px 0' }}>
+        <div className="container">
+          <div className="section-box" style={{ position: 'relative' }}>
+            <div className="stats-row">
+              {stats.map((stat, i) => (
+                <motion.div key={i} className="stat-item" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                  <div className="stat-number">
+                    <Counter end={stat.value} />{stat.value > 0 && <span className="stat-plus">+</span>}
+                  </div>
+                  <div className="stat-label">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+            <div className="bg-overlay" />
+          </div>
+        </div>
+      </section>
+
+      {/* ── TECHNOLOGIES / SKILLS ── */}
+      <section style={{ padding: '48px 0' }}>
+        <div className="container">
+          <div className="section-box" style={{ position: 'relative', background: 'var(--bg-dark)' }}>
+            <div style={{ position: 'relative', zIndex: 1, padding: '48px 0' }}>
+              <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <div className="section-label" style={{ justifyContent: 'center' }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 18, height: 18 }}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                  <span>Technologies</span>
+                </div>
+                <h3 style={{ fontWeight: 500 }}>My Skills</h3>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                <div className="marquee-track" style={{ borderTop: 'none', borderBottom: 'none', padding: '12px 0', width: '100%' }}>
+                  <div className="marquee-content">
+                    {[...skills.slice(0, 9), ...skills.slice(0, 9), ...skills.slice(0, 9)].map((s, i) => (
+                      <span key={i} className="skill-marquee-item"><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="marquee-track" style={{ borderTop: 'none', borderBottom: 'none', padding: '12px 0', width: '85%', margin: '0 auto' }}>
+                  <div className="marquee-content">
+                    {[...skills.slice(9), ...skills.slice(9), ...skills.slice(9)].map((s, i) => (
+                      <span key={i} className="skill-marquee-item"><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── AREAS OF EXPERTISE ── */}
+      <section style={{ padding: '48px 0' }}>
+        <div className="container">
+          <div className="section-box">
+            <div className="section-box-inner" style={{ padding: '40px' }}>
+              <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <div className="section-label" style={{ justifyContent: 'center' }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 18, height: 18 }}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                  <span>Areas of Expertise</span>
+                </div>
+                <h3 style={{ fontWeight: 500 }}>
+                  Explore my key areas of<br />
+                  <span style={{ color: 'var(--text-muted)' }}>cybersecurity knowledge</span>
+                </h3>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+                {expertise.map((item, i) => (
+                  <motion.div key={i} className="service-card" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                    {item.icon}
+                    <h6>{item.title}</h6>
+                    <p>{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── EDUCATION & EXPERIENCE ── */}
+      <section style={{ padding: '32px 0' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            {/* Education & Certifications */}
+            <div className="section-box" style={{ position: 'relative' }}>
+              <div style={{ padding: '32px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 28, height: 28, color: 'var(--primary-color)' }}><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5" /></svg>
+                  <h2 style={{ fontSize: '1.3rem', fontWeight: 500, margin: 0 }}>Education & Certifications</h2>
+                </div>
+                <div className="timeline">
+                  {education.map((item, i) => (
+                    <div key={i} className="timeline-item">
+                      <div className="timeline-date">{item.date}{item.upcoming ? ' · Upcoming' : ''}</div>
+                      <div className="timeline-title" style={item.upcoming ? { color: 'var(--text-muted)' } : {}}>{item.title}</div>
+                      <div className="timeline-subtitle">{item.org}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-overlay" />
+            </div>
+
+            {/* Experience */}
+            <div className="section-box" style={{ position: 'relative' }}>
+              <div style={{ padding: '32px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 28, height: 28, color: 'var(--primary-color)' }}><path d="M10 2l2 4 4 .5-3 3 .75 4.5L10 12l-3.75 2L7 9.5l-3-3L8 6z" /><path d="M5.5 14l-2 2" /><path d="M18.5 14l2 2" /><path d="M12 18v4" /></svg>
+                  <h2 style={{ fontSize: '1.3rem', fontWeight: 500, margin: 0 }}>Experience</h2>
+                </div>
+                <div className="timeline">
+                  {experience.map((item, i) => (
+                    <div key={i} className="timeline-item">
+                      <div className="timeline-title">{item.title}</div>
+                      <div className="timeline-date" style={{ marginBottom: '6px' }}>{item.period}</div>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                        {item.bullets.map((b, j) => (
+                          <li key={j} style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontFamily: 'var(--secondary-font)', lineHeight: 1.45, display: 'flex', gap: '8px', paddingLeft: '2px' }}>
+                            <span style={{ color: 'var(--primary-color)' }}>›</span> {b}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-overlay" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── RECENT ACTIVITY ── */}
+      <section style={{ padding: '32px 0 64px' }}>
+        <div className="container">
+            <div className="section-box" style={{ position: 'relative' }}>
+              <div style={{ padding: '32px' }}>
+                <div className="section-label" style={{ marginBottom: '24px' }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 18, height: 18 }}><path d="M12 8v4l3 3M12 21a9 9 0 100-18 9 9 0 000 18z" /></svg>
+                  <span>Recent Activity</span>
+                </div>
+                <div className="timeline">
+                  {activityFeed.map((item, i) => (
+                    <Link key={i} to={`/post/${item.slug}`} className="timeline-item activity-link">
+                      <div className="timeline-date">{item.date}</div>
+                      <div className="timeline-subtitle">{item.text}</div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-overlay" />
+            </div>
+        </div>
+      </section>
+
+      {/* ── CONTACT ── */}
+      <section id="contact" style={{ padding: '64px 0', position: 'relative', overflow: 'hidden' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '7fr 5fr', gap: '48px', alignItems: 'start' }}>
+            {/* Form */}
+            <form onSubmit={handleSubmit}>
+              <h3 style={{ color: 'var(--primary-color)', marginBottom: '24px', fontWeight: 500, fontSize: '1.3rem' }}>Let's connect</h3>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '12px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '8px', color: 'var(--text-heading)' }}>Name</label>
+                  <input className="form-input" placeholder="Your Name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '8px', color: 'var(--text-heading)' }}>Email</label>
+                  <input className="form-input" type="email" placeholder="Your Email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
+                </div>
+              </div>
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '8px', color: 'var(--text-heading)' }}>Subject</label>
+                <input className="form-input" placeholder="Subject" value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} />
+              </div>
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '8px', color: 'var(--text-heading)' }}>Message</label>
+                <textarea className="form-input" rows={3} placeholder="Your Message" style={{ resize: 'vertical' }} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} required />
+              </div>
+              <button className="btn-primary-2" type="submit" disabled={sending} style={{ opacity: sending ? 0.7 : 1 }}>
+                {sent ? 'Sent!' : sending ? 'Sending...' : 'Send Message'}
+                {!sent && !sending && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 16, height: 16 }}><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>}
+              </button>
+            </form>
+
+            {/* Social links */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {socialLinksContact.map(({ label, handle, href, icon }) => (
+                <a key={label} href={href} target={href.startsWith('mailto') ? undefined : '_blank'} rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'} className="social-card">
+                  <div className="social-card-icon">{icon}</div>
+                  <div>
+                    <div className="social-card-label">{label}</div>
+                    <div className="social-card-handle">{handle}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 };
