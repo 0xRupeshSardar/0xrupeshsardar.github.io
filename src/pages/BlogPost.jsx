@@ -302,7 +302,7 @@ const BlogPost = () => {
           </aside>
         )}
 
-        <div style={{ marginBottom: '24px' }}>
+        <div className="post-title-block">
           <div className="post-meta">
             {post.tag && !post.private && <span className="post-tag">{post.tag}</span>}
             <time>{formattedDate}</time>
