@@ -303,14 +303,14 @@ const Home = () => {
                 <div className="marquee-track" style={{ borderTop: 'none', borderBottom: 'none', padding: '12px 0', width: '100%' }}>
                   <div className="marquee-content">
                     {[...skills.slice(0, 9), ...skills.slice(0, 9), ...skills.slice(0, 9)].map((s, i) => (
-                      <span key={i} className="skill-marquee-item" style={{ borderLeft: `3px solid ${s.color}` }}><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
+                      <span key={i} className="skill-marquee-item" style={{ boxShadow: `inset 3px 0 0 ${s.color}` }}><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
                     ))}
                   </div>
                 </div>
                 <div className="marquee-track" style={{ borderTop: 'none', borderBottom: 'none', padding: '12px 0', width: '85%', margin: '0 auto' }}>
                   <div className="marquee-content">
                     {[...skills.slice(9), ...skills.slice(9), ...skills.slice(9)].map((s, i) => (
-                      <span key={i} className="skill-marquee-item" style={{ borderLeft: `3px solid ${s.color}` }}><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
+                      <span key={i} className="skill-marquee-item" style={{ boxShadow: `inset 3px 0 0 ${s.color}` }}><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
                     ))}
                   </div>
                 </div>
