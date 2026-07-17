@@ -291,7 +291,7 @@ const Home = () => {
       {/* ── TECHNOLOGIES / SKILLS ── */}
       <section style={{ padding: '48px 0' }}>
         <div className="container">
-          <div className="section-box" style={{ position: 'relative', background: 'var(--bg-dark)' }}>
+          <div className="section-box" style={{ position: 'relative' }}>
             <div style={{ position: 'relative', zIndex: 1, padding: '48px 0' }}>
               <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                 <div className="section-label" style={{ justifyContent: 'center' }}>
