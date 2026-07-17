@@ -25,6 +25,7 @@
   --bg-overlay-from: rgba(19,19,26,0);
   --bg-overlay-to: #13131a;
   --bg-focus: rgba(14,14,20,0.92);
+  --bg-reading: rgba(8,8,12,0.97);
   --scrollbar-thumb: rgba(75,85,99,0.5);
   --star-color: 255,255,255;
   --star-opacity: 1;
@@ -51,6 +52,7 @@
   --bg-overlay-from: rgba(232,235,242,0);
   --bg-overlay-to: #e8ebf2;
   --bg-focus: rgba(210,215,228,0.94);
+  --bg-reading: rgba(195,200,215,0.97);
   --scrollbar-thumb: rgba(0,0,0,0.18);
   --star-color: 90,90,115;
   --star-opacity: 0.5;
@@ -530,7 +532,7 @@ a { color: inherit; text-decoration: none; }
 .post-toc-link:hover { color: var(--primary-color); border-left-color: var(--border-hover); }
 .post-toc-link.active { color: var(--primary-color); border-left-color: var(--primary-color); }
 
-.post-article { background: var(--bg-focus); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 48px; }
+.post-article { background: var(--bg-reading); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 48px; }
 
 .post-header { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border-color); }
 .post-meta { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; color: var(--text-muted); font-family: var(--primary-font); margin-bottom: 18px; flex-wrap: wrap; }
