@@ -7,23 +7,23 @@ import Counter from '../components/Counter';
 import posts from '../data/posts';
 
 const skills = [
-  { file: 'aws', name: 'AWS' },
-  { file: 'caido', name: 'Caido' },
-  { file: 'azure', name: 'Azure' },
-  { file: 'kali', name: 'Kali' },
-  { file: 'wireshark', name: 'Wireshark' },
-  { file: 'postman', name: 'Postman' },
-  { file: 'burp', name: 'Burp Suite' },
-  { file: 'python', name: 'Python' },
-  { file: 'owasp-zap', name: 'OWASP ZAP' },
-  { file: 'nmap', name: 'Nmap' },
-  { file: 'linux', name: 'Linux' },
-  { file: 'ghidraa', name: 'Ghidra' },
-  { file: 'go', name: 'Go' },
-  { file: 'docker', name: 'Docker' },
-  { file: 'tenb', name: 'Tenable' },
-  { file: 'metasploite', name: 'Metasploit' },
-  { file: 'mitmproxy', name: 'Mitmproxy' },
+  { file: 'aws', name: 'AWS', color: '#FF9900' },
+  { file: 'caido', name: 'Caido', color: '#8ecb00' },
+  { file: 'azure', name: 'Azure', color: '#0078D4' },
+  { file: 'kali', name: 'Kali', color: '#367BF0' },
+  { file: 'wireshark', name: 'Wireshark', color: '#00BFFF' },
+  { file: 'postman', name: 'Postman', color: '#FF6C37' },
+  { file: 'burp', name: 'Burp Suite', color: '#FF6633' },
+  { file: 'python', name: 'Python', color: '#FFD43B' },
+  { file: 'owasp-zap', name: 'OWASP ZAP', color: '#7CB342' },
+  { file: 'nmap', name: 'Nmap', color: '#4FC3F7' },
+  { file: 'linux', name: 'Linux', color: '#FCC624' },
+  { file: 'ghidraa', name: 'Ghidra', color: '#C17A38' },
+  { file: 'go', name: 'Go', color: '#00ADD8' },
+  { file: 'docker', name: 'Docker', color: '#2496ED' },
+  { file: 'tenb', name: 'Tenable', color: '#00A4E4' },
+  { file: 'metasploite', name: 'Metasploit', color: '#E74C3C' },
+  { file: 'mitmproxy', name: 'Mitmproxy', color: '#4CAF50' },
 ];
 
 const heroTechs = ['AWS', 'GCP', 'Caido', 'Kali Linux', 'Wireshark', 'Postman', 'Burp Suite', 'Python', 'OWASP ZAP', 'Nmap', 'Linux', 'Ghidra', 'Go', 'Docker', 'Tenable', 'Metasploit', 'mitmproxy'];
@@ -303,14 +303,14 @@ const Home = () => {
                 <div className="marquee-track" style={{ borderTop: 'none', borderBottom: 'none', padding: '12px 0', width: '100%' }}>
                   <div className="marquee-content">
                     {[...skills.slice(0, 9), ...skills.slice(0, 9), ...skills.slice(0, 9)].map((s, i) => (
-                      <span key={i} className="skill-marquee-item"><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
+                      <span key={i} className="skill-marquee-item" style={{ borderLeft: `3px solid ${s.color}` }}><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
                     ))}
                   </div>
                 </div>
                 <div className="marquee-track" style={{ borderTop: 'none', borderBottom: 'none', padding: '12px 0', width: '85%', margin: '0 auto' }}>
                   <div className="marquee-content">
                     {[...skills.slice(9), ...skills.slice(9), ...skills.slice(9)].map((s, i) => (
-                      <span key={i} className="skill-marquee-item"><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
+                      <span key={i} className="skill-marquee-item" style={{ borderLeft: `3px solid ${s.color}` }}><img src={`/images/${s.file}.png`} alt={s.name} />{s.name}</span>
                     ))}
                   </div>
                 </div>
