@@ -6,6 +6,7 @@ import PostHeader from '../components/PostHeader';
 import PostBody from '../components/PostBody';
 import posts from '../data/posts';
 import { decryptContent, encryptContent } from '../utils/crypto';
+import { slugify } from '../utils/markdown';
 import 'highlight.js/styles/tokyo-night-dark.css';
 import unlockedCache from '../data/unlockCache';
 
