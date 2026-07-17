@@ -197,7 +197,7 @@ const Home = () => {
             <div className="section-box-inner">
               <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '5fr 6fr', alignItems: 'end', padding: '48px 48px 48px 0' }}>
                 {/* Image column — framed profile picture */}
-                <div className="hero-image-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: '48px' }}>
+                <div className="hero-image-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: '48px', alignSelf: 'start' }}>
                   <div style={{ position: 'relative', width: 'clamp(220px, 26vw, 340px)', aspectRatio: '1 / 1' }}>
                     {/* Frame + image/placeholder */}
                     <div style={{
