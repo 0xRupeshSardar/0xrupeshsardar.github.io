@@ -19,15 +19,16 @@ const SolarSystem = () => {
     const STAR_COUNT = 250;
 
     // Each planet has dark-mode (color/glow) and light-mode (colorLight/glowLight) variants
+    // Real orbital speed ratios (Earth = 1 yr → angular speed 0.003)
     const planets = [
-      { radius: 55,  size: 4.8, speed: 0.008,   color: 'rgba(230,130,30,0.9)',  glow: 'rgba(230,130,30,0.32)',  colorLight: 'rgba(190,110,30,0.95)', glowLight: 'rgba(190,110,30,0.3)',   rings: false },
-      { radius: 90,  size: 6.6, speed: 0.005,   color: 'rgba(50,130,230,0.9)',  glow: 'rgba(50,130,230,0.3)',   colorLight: 'rgba(35,100,200,0.95)', glowLight: 'rgba(35,100,200,0.28)',  rings: false },
-      { radius: 130, size: 7.2, speed: 0.003,   color: 'rgba(30,170,150,0.9)',  glow: 'rgba(30,170,150,0.28)',  colorLight: 'rgba(25,140,125,0.95)', glowLight: 'rgba(25,140,125,0.26)',  rings: false },
-      { radius: 175, size: 6.6, speed: 0.002,   color: 'rgba(220,70,55,0.9)',   glow: 'rgba(220,70,55,0.28)',   colorLight: 'rgba(190,60,50,0.95)',  glowLight: 'rgba(190,60,50,0.26)',   rings: false },
-      { radius: 230, size: 12,  speed: 0.0012,  color: 'rgba(190,150,90,0.9)',  glow: 'rgba(190,150,90,0.24)',  colorLight: 'rgba(150,115,60,0.9)',  glowLight: 'rgba(150,115,60,0.22)',  rings: false },
-      { radius: 290, size: 9.6, speed: 0.0007,  color: 'rgba(210,170,70,0.9)',  glow: 'rgba(210,170,70,0.22)',  colorLight: 'rgba(175,140,50,0.9)',  glowLight: 'rgba(175,140,50,0.2)',   rings: true },
-      { radius: 350, size: 8.4, speed: 0.00035, color: 'rgba(80,170,210,0.9)',  glow: 'rgba(80,170,210,0.22)',  colorLight: 'rgba(60,140,180,0.9)',  glowLight: 'rgba(60,140,180,0.2)',   rings: false },
-      { radius: 410, size: 7.2, speed: 0.0002,   color: 'rgba(45,90,180,0.9)',   glow: 'rgba(45,90,180,0.2)',    colorLight: 'rgba(40,80,160,0.9)',   glowLight: 'rgba(40,80,160,0.18)',   rings: false },
+      { radius: 55,  size: 4.8, speed: 0.0125,  color: 'rgba(230,130,30,0.9)',  glow: 'rgba(230,130,30,0.32)',  colorLight: 'rgba(190,110,30,0.95)', glowLight: 'rgba(190,110,30,0.3)',   rings: false },
+      { radius: 90,  size: 6.6, speed: 0.0049,   color: 'rgba(50,130,230,0.9)',  glow: 'rgba(50,130,230,0.3)',   colorLight: 'rgba(35,100,200,0.95)', glowLight: 'rgba(35,100,200,0.28)',  rings: false },
+      { radius: 130, size: 7.2, speed: 0.0030,   color: 'rgba(30,170,150,0.9)',  glow: 'rgba(30,170,150,0.28)',  colorLight: 'rgba(25,140,125,0.95)', glowLight: 'rgba(25,140,125,0.26)',  rings: false },
+      { radius: 175, size: 6.6, speed: 0.0016,   color: 'rgba(220,70,55,0.9)',   glow: 'rgba(220,70,55,0.28)',   colorLight: 'rgba(190,60,50,0.95)',  glowLight: 'rgba(190,60,50,0.26)',   rings: false },
+      { radius: 230, size: 12,  speed: 0.00025,  color: 'rgba(190,150,90,0.9)',  glow: 'rgba(190,150,90,0.24)',  colorLight: 'rgba(150,115,60,0.9)',  glowLight: 'rgba(150,115,60,0.22)',  rings: false },
+      { radius: 290, size: 9.6, speed: 0.00010,  color: 'rgba(210,170,70,0.9)',  glow: 'rgba(210,170,70,0.22)',  colorLight: 'rgba(175,140,50,0.9)',  glowLight: 'rgba(175,140,50,0.2)',   rings: true },
+      { radius: 350, size: 8.4, speed: 0.000036, color: 'rgba(80,170,210,0.9)',  glow: 'rgba(80,170,210,0.22)',  colorLight: 'rgba(60,140,180,0.9)',  glowLight: 'rgba(60,140,180,0.2)',   rings: false },
+      { radius: 410, size: 7.2, speed: 0.000018,  color: 'rgba(45,90,180,0.9)',   glow: 'rgba(45,90,180,0.2)',    colorLight: 'rgba(40,80,160,0.9)',   glowLight: 'rgba(40,80,160,0.18)',   rings: false },
     ];
 
     const resize = () => {
