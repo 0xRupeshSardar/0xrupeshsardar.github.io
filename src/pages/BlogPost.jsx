@@ -302,18 +302,18 @@ const BlogPost = () => {
           </aside>
         )}
 
-        <motion.article className="post-article" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <header className="post-header">
-            <div className="post-meta">
-              {post.tag && !post.private && <span className="post-tag">{post.tag}</span>}
-              <time>{formattedDate}</time>
-              <span>·</span>
-              <span>{post.readTime} read</span>
-            </div>
-            <h1 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)', lineHeight: 1.15 }}>{post.title}</h1>
-            {post.excerpt && <p className="post-excerpt">{post.excerpt}</p>}
-          </header>
+        <div style={{ marginBottom: '24px' }}>
+          <div className="post-meta">
+            {post.tag && !post.private && <span className="post-tag">{post.tag}</span>}
+            <time>{formattedDate}</time>
+            <span>·</span>
+            <span>{post.readTime} read</span>
+          </div>
+          <h1 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)', lineHeight: 1.15, margin: '8px 0 0' }}>{post.title}</h1>
+          {post.excerpt && <p className="post-excerpt">{post.excerpt}</p>}
+        </div>
 
+        <motion.article className="post-article" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <div className="prose">
             {content ? (
               <ReactMarkdown
