@@ -524,7 +524,7 @@ a { color: inherit; text-decoration: none; }
 /* ── Blog post reading experience ── */
 .reading-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--primary-color), var(--gradient-color)); z-index: 1000; transition: width 0.1s linear; }
 
-.post-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; max-width: 1200px; margin: 0 auto; padding: 96px 24px; align-items: start; }
+.post-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; max-width: 1320px; margin: 0 auto; padding: 96px 24px; align-items: start; }
 
 .post-toc { position: sticky; top: 100px; }
 .post-toc-label { font-family: var(--primary-font); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 12px; }
