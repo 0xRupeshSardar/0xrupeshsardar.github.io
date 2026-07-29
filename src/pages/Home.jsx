@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import Typewriter from '../components/Typewriter';
 import Counter from '../components/Counter';
 import posts from '../data/posts';
+import { supabase, isSupabaseEnabled } from '../utils/supabase';
 
 const skills = [
   { file: 'aws', name: 'AWS', color: '#FF9900' },
@@ -175,17 +176,27 @@ const Home = () => {
   const [sent, setSent] = useState(false);
   const [imgError, setImgError] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
     setSending(true);
-    // Replace with Formspree/API endpoint for real submission
-    setTimeout(() => {
-      setSending(false);
+    try {
+      if (isSupabaseEnabled) {
+        const { error } = await supabase
+          .from('contact_submissions')
+          .insert({ name: form.name, email: form.email, subject: form.subject, message: form.message });
+        if (error) throw error;
+      } else {
+        // Fallback when Supabase isn't configured — simulate success
+        await new Promise(r => setTimeout(r, 600));
+      }
       setSent(true);
       setForm({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setSent(false), 4000);
-    }, 600);
+    } catch {
+      setSent(false);
+    }
+    setSending(false);
   };
 
   return (

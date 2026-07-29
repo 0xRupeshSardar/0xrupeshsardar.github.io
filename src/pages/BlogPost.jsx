@@ -4,8 +4,10 @@ import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import PostHeader from '../components/PostHeader';
 import PostBody from '../components/PostBody';
+import Comments from '../components/Comments';
 import posts from '../data/posts';
 import { decryptContent, encryptContent } from '../utils/crypto';
+import { logPageView } from '../utils/api';
 import { slugify } from '../utils/markdown';
 import 'highlight.js/styles/tokyo-night-dark.css';
 import unlockedCache from '../data/unlockCache';
@@ -161,6 +163,11 @@ const BlogPost = () => {
 
   const formattedDate = post ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
 
+  // Analytics — log page view
+  useEffect(() => {
+    if (post) logPageView(`/post/${slug}`, slug);
+  }, [slug, post]);
+
   if (!post) {
     return (
       <Layout>
@@ -224,6 +231,7 @@ const BlogPost = () => {
         <div className="post-main">
           <PostHeader post={post} formattedDate={formattedDate} />
           <PostBody content={content} older={older} newer={newer} />
+          <Comments postSlug={slug} />
         </div>
       </div>
     </Layout>
