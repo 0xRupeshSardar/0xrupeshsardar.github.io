@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase, isSupabaseEnabled } from '../utils/supabase';
+import { supabase } from '../utils/supabase';
 
 const Comments = ({ postSlug }) => {
   const [comments, setComments] = useState([]);
@@ -8,15 +8,17 @@ const Comments = ({ postSlug }) => {
   const [body, setBody] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!isSupabaseEnabled) return;
+    if (!supabase) { setLoaded(true); return; }
     supabase
       .from('comments')
       .select('id, author, email, body, created_at, parent_id')
       .eq('post_slug', postSlug)
       .order('created_at', { ascending: false })
-      .then(({ data }) => setComments(data || []));
+      .then(({ data }) => { setComments(data || []); setLoaded(true); })
+      .catch(() => setLoaded(true));
   }, [postSlug]);
 
   const handleSubmit = async (e) => {
@@ -49,19 +51,6 @@ const Comments = ({ postSlug }) => {
 
   const formatDate = (d) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-  if (!isSupabaseEnabled) {
-    return (
-      <div style={{ marginTop: '64px', paddingTop: '32px', borderTop: '1px solid var(--border-color)' }}>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 500, marginBottom: '24px', fontFamily: 'var(--primary-font)' }}>
-          Comments
-        </h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontFamily: 'var(--secondary-font)' }}>
-          Comments are loading… If they don't appear, the database may not be configured.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div style={{ marginTop: '64px', paddingTop: '32px', borderTop: '1px solid var(--border-color)' }}>
       <h3 style={{ fontSize: '1.1rem', fontWeight: 500, marginBottom: '24px', fontFamily: 'var(--primary-font)' }}>
@@ -69,7 +58,7 @@ const Comments = ({ postSlug }) => {
       </h3>
 
       {/* Comment list */}
-      {comments.length === 0 ? (
+      {loaded && comments.length === 0 ? (
         <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '24px', fontFamily: 'var(--secondary-font)' }}>
           No comments yet. Be the first to share your thoughts.
         </p>
@@ -99,39 +88,41 @@ const Comments = ({ postSlug }) => {
       )}
 
       {/* Comment form */}
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '600px' }}>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <input
+      {supabase && (
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '600px' }}>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <input
+              className="form-input"
+              placeholder="Name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+              style={{ flex: 1 }}
+            />
+            <input
+              className="form-input"
+              type="email"
+              placeholder="Email (optional)"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              style={{ flex: 1 }}
+            />
+          </div>
+          <textarea
             className="form-input"
-            placeholder="Name"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            placeholder="Share your thoughts…"
+            value={body}
+            onChange={e => setBody(e.target.value)}
+            rows={3}
+            style={{ resize: 'vertical' }}
             required
-            style={{ flex: 1 }}
           />
-          <input
-            className="form-input"
-            type="email"
-            placeholder="Email (optional)"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            style={{ flex: 1 }}
-          />
-        </div>
-        <textarea
-          className="form-input"
-          placeholder="Share your thoughts…"
-          value={body}
-          onChange={e => setBody(e.target.value)}
-          rows={3}
-          style={{ resize: 'vertical' }}
-          required
-        />
-        {error && <p style={{ fontSize: '0.8rem', color: '#ef4444' }}>Failed to post comment. Please try again.</p>}
-        <button className="btn-primary-2" type="submit" disabled={submitting || !name.trim() || !body.trim()} style={{ opacity: !name.trim() || !body.trim() ? 0.5 : 1, alignSelf: 'flex-start' }}>
-          {submitting ? 'Posting…' : 'Post Comment'}
-        </button>
-      </form>
+          {error && <p style={{ fontSize: '0.8rem', color: '#ef4444' }}>Failed to post comment. Please try again.</p>}
+          <button className="btn-primary-2" type="submit" disabled={submitting || !name.trim() || !body.trim()} style={{ opacity: !name.trim() || !body.trim() ? 0.5 : 1, alignSelf: 'flex-start' }}>
+            {submitting ? 'Posting…' : 'Post Comment'}
+          </button>
+        </form>
+      )}
     </div>
   );
 };
