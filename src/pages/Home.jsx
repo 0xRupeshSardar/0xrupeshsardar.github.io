@@ -5,7 +5,6 @@ import Layout from '../components/Layout';
 import Typewriter from '../components/Typewriter';
 import Counter from '../components/Counter';
 import posts from '../data/posts';
-import { supabase, isSupabaseEnabled } from '../utils/supabase';
 
 const skills = [
   { file: 'aws', name: 'AWS', color: '#FF9900' },
@@ -181,13 +180,13 @@ const Home = () => {
     if (!form.name || !form.email || !form.message) return;
     setSending(true);
     try {
-      if (isSupabaseEnabled) {
+      const { supabase } = await import('../utils/supabase');
+      if (supabase) {
         const { error } = await supabase
           .from('contact_submissions')
           .insert({ name: form.name, email: form.email, subject: form.subject, message: form.message });
         if (error) throw error;
       } else {
-        // Fallback when Supabase isn't configured — simulate success
         await new Promise(r => setTimeout(r, 600));
       }
       setSent(true);
