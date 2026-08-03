@@ -29,6 +29,21 @@
 
     <meta name="theme-color" content="#8ecb00" />
 
+    <!-- Google Analytics (set VITE_GA_ID in .env to enable) -->
+    <script>
+      var gaId = '%VITE_GA_ID%';
+      if (gaId && gaId.indexOf('G-') === 0) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaId);
+      }
+    </script>
+
     <!-- Schema.org structured data — Person profile -->
     <script type="application/ld+json">
     {
@@ -71,7 +86,7 @@
         if (m) m.content = t === 'light' ? '#e8ebf2' : '#8ecb00';
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-CSrDu5rv.js"></script>
+    <script type="module" crossorigin src="/assets/index-DkEvfmLp.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/react-vendor-DYHeygbY.js">
     <link rel="modulepreload" crossorigin href="/assets/framer-motion-BrnWVGLE.js">
     <link rel="modulepreload" crossorigin href="/assets/markdown-CDb8ZJjI.js">
