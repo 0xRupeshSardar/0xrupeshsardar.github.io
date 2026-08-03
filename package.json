@@ -9,7 +9,7 @@
     "postbuild": "cp dist/index.html dist/404.html",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "node --env-file=.env scripts/generate-sitemap.js && npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

@@ -271,6 +271,14 @@ const Home = () => {
                         <Typewriter texts={heroTechs} speed={80} delay={1500} />
                       </span>
                     </div>
+
+                    {/* Resume download */}
+                    <div style={{ marginTop: '24px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                      <a href="/resume.pdf" download className="btn-primary-2" style={{ textDecoration: 'none' }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 16, height: 16 }}><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" /></svg>
+                        Download Resume
+                      </a>
+                    </div>
                   </motion.div>
                 </div>
               </div>
