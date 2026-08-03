@@ -42,18 +42,25 @@ export async function fetchComments(postSlug) {
   if (!isSupabaseEnabled) return [];
   const { data, error } = await supabase
     .from('comments')
-    .select('id, author, body, created_at')
+    .select('id, author, email, body, created_at, parent_id')
     .eq('post_slug', postSlug)
     .order('created_at', { ascending: false });
   if (error) return [];
   return data || [];
 }
 
-export async function postComment(postSlug, author, body) {
+export async function postComment(postSlug, author, body, email = null, parentId = null) {
   if (!isSupabaseEnabled) return { error: 'Comments require database setup' };
   const { error } = await supabase
     .from('comments')
-    .insert({ post_slug: postSlug, author, body });
+    .insert({
+      post_slug: postSlug,
+      author,
+      body,
+      email,
+      parent_id: parentId,
+      user_agent: navigator.userAgent,
+    });
   return { error };
 }
 
@@ -62,6 +69,11 @@ export async function postComment(postSlug, author, body) {
 export async function logPageView(path, slug = null) {
   if (!isSupabaseEnabled) return;
   try {
-    await supabase.from('page_views').insert({ path, slug });
+    await supabase.from('page_views').insert({
+      path,
+      slug,
+      referrer: document.referrer || null,
+      user_agent: navigator.userAgent,
+    });
   } catch { /* analytics should never break the page */ }
 }
