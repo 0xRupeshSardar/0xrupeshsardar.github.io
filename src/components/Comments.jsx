@@ -49,7 +49,18 @@ const Comments = ({ postSlug }) => {
 
   const formatDate = (d) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-  if (!isSupabaseEnabled) return null;
+  if (!isSupabaseEnabled) {
+    return (
+      <div style={{ marginTop: '64px', paddingTop: '32px', borderTop: '1px solid var(--border-color)' }}>
+        <h3 style={{ fontSize: '1.1rem', fontWeight: 500, marginBottom: '24px', fontFamily: 'var(--primary-font)' }}>
+          Comments
+        </h3>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontFamily: 'var(--secondary-font)' }}>
+          Comments are loading… If they don't appear, the database may not be configured.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ marginTop: '64px', paddingTop: '32px', borderTop: '1px solid var(--border-color)' }}>
